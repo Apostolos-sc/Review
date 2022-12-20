@@ -1,6 +1,6 @@
 //Author  : Apostolos Scondrianis
 //Project : Reviewing C++
-//File    : main.cpp
+//File    : pointers.cpp
 //Version : 0.1
 #include <iostream>
 using namespace std;
