@@ -1,7 +1,7 @@
 Elements of Object Oriented Design (OOD)
 ====================
 - Abstraction
-- Encapsulations/Information Hiding
+- Encapsulation/Information Hiding
 - Hierarchy
 - Modularity
 
@@ -31,3 +31,4 @@ Modularity
 * A module has an __interface__ (description) and a __body__ (implementation)
     * Changing the body requires recompiling just that module.
     * Changing the interface requires recompiling the module, plus all other modules that depend on the interface.
+* Decomposing an object too much (more modules) has advantages and disadvantages.
