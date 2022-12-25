@@ -17,7 +17,7 @@ using namespace std;
  * Memory leaks can cause issues, you need to be aware how dynamic allocation in C++ works.
 */
 int main() {
-    String *p = NULL;
+    MyString *p = NULL;
     p = fun();
     delete p; //deallocate dynamically allocated memory
     return 0;
