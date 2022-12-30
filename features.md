@@ -26,3 +26,10 @@ Static Member
 * A static member function does not have a "this" pointer.
 * A static member function may be invoked through a class object or a pointer to a class or can 
 be accessed directly even if no class object is declared.
+
+Rule of Big Three
+=================
+If a class has memory on heap it needs the following methods : 
+- Copy Constructor
+- Destructor
+- Assignment Operator

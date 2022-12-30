@@ -17,7 +17,7 @@ classes. They are weekly connected, i.e., they are merely associates with no hie
 If inheritance or aggregation/composition do not apply, it is most likely a simple association relationship.
 For diagrams, the association of two classes should be labeled.(use active or passive voice)
 
-Aggregation
+Aggregation(Subset of Association)
 -----------
 ***
 An aggregation represents an assymetric association, in which one of the classes plays a more important
@@ -27,10 +27,11 @@ role than the other one. The following criteria imply an aggregation
 
 An aggregation denotes a whole/part hierarchy with the ability to navigate from the whole (aggregate) to
 its parts (attributes). In C++ the part is normally being referenced to either a pointer or by a reference.
+If there is a choice between creating a hierarchy (inheritance) or an aggregation choose to create an 
+aggregation because hierarchies are difficult to maintain.(confusing, difficult to test and maintain)
 
 Composition
 -----------
-***
 A strong type of aggregation. An aggregation in which when deleting the whole the part is also deleted is called 
 a composition. The "part" objects are usually created in the constructor of the container class. In C++ a 
 composition often implies the dynamic allocation of memory for the object of the "part". If the lifetime of the 
@@ -41,7 +42,6 @@ relationships between classes.
 
 Inheritance
 -----------
-***
 A relationship among classes where a subclass inherits the structure and behavior of its super-class.
 - Defines the "is a" or generalization/specialization hierachy.
 - Structure : Instance Variables.
@@ -58,15 +58,23 @@ member to a derived class.
         //data members
     };```
 
+How to evaluate inheritance ?
+-----------------------------
+Software Engineering best practices :
+- SOLID Principles
+    1. __Single Responsibility__ : A module should only have one reason to change.
+    2. __Open Close Principle__ : A system should be closed to modification and open to extension.
+    3. __Liskoff's Principle__ : Objects of a superclass should be replaceable with objects of its subclasses without breaking the application. In other words, what we want is to have the objects of our subclasses behaving the same way as the objects of our superclass.
+
 ### __Base Class Design__
-***
+
 The syntax for defining a base class is the same as an ordinary class with two exceptions:
 - Members intended to be inherited but not intended to be public are declared as __protected__ members.
 - __Virtual Functions__ are member functions whose implementation depends on representational details of 
 subsequent derivations that are unknown at the time of the base class design.
 
 ### __Inherited Member Access__
-***
+
 The derived class member functions can have access to inherited members directly or by using the scope 
 resolution operator. In most cases, the use of the __class scope operator__ is redundant. There are two
 cases where using scope resolution operator is necessary :
@@ -74,13 +82,13 @@ cases where using scope resolution operator is necessary :
 - When two or more base classes define an inherited member with the same name.
 
 ### __Base Class Initialization__
-***
+
 A member initialization list is used to pass arguments to a base class constructor. The tag name of a 
 base class is specified, follwed by its argument list enclosed in parentheses. Look in the Person and
 Student example in this folder.
 
 ### __Relationship between Base and Derived Class__
-***
+
 A derived class can be assigned to any of its public classes without requiring an explicit cast. This 
 is possible because simply a Derived class is a Base class with additional members/functionalities. By
 casting it as a Base Class object we are hiding its derived members/functionalities. If you wish to
@@ -88,7 +96,7 @@ cast a Base Class Object as a Derived class object you must define an "explicit 
 Derived Class.
 
 ### __Virtual Functions__
-***
+
 - A __virtual function__ is a special function invoked through a public base class reference or pointer
 and it is bound dynamically at run time.
 - The instance invoked is determined by the class type of the actual object addressed by the pointer or
@@ -108,6 +116,7 @@ the base class instance.
 it is not handled as virtual. Any subsequent derived classes may still redefine the virtual function.
 - You may define a null instance of virtual function if you wish a derived object to not have the function
 handler.
+- Virtual Functions essentially allows for more control over polymorphism.
 - __Virtual Destructor__ :
     A destructor should be usally declared virtual if it is responsible to remove an allocated memory.
     - This is to avoid undefined behavior or a memory leak.
@@ -115,14 +124,18 @@ handler.
     to do their own cleanup.)
     - The mechanical details of why you need a virtual destructor when someone says delete using a Base pointer that is pointing at a Derived object. When you say delete p, and the class of p has a virtual destructor, the destructor that gets invoked is the one associated with the Derived Object, not necessarily the one associated with the type of the pointer.
 ## Some Interesting Facts
-***
+
 1. A class is __abstract__ if it has at least one pure virtual function.
 2. There can be pointers and references of abstract class type.
 3. Not overriding a pure virtual function in a Derived Class, renders the Derived Class an Abstract Class.
 4. An Abstract class can have constructors.
-5. An abstract class in C++ can be defined using struct keyword. 
+5. Abstract Classes are mainly used for Upcasting, so that its derived classes can use its interface.
+6. Abstract Classes can have normal functions and variables along with a pure virtual function.
+7. An abstract class in C++ can be defined using struct keyword. 
     ```
     struct shapeClass {
         virtual void Draw() = 0;
     }
     ```
+8. Pure virtual functions do not have to be implemented in the parent class, but must be implemented in the child class if you want to
+instantiate an object of that class.
