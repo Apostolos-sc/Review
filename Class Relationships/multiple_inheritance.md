@@ -6,14 +6,15 @@ the base classes, not the order in which the base classes are constructed. The b
 constructors are called in the order in which they appear in the class derivation list. For example,
 in ``` class C : public B, public A {} ``` the constructor of class B is called first and then the
 constructor of class A is called.
-## Possible Ambiguity Error
+## Possible Ambiguity Error (Diamond Problem)
 Although a base class may legally appear only once in a derivation list, a base class data member 
 can appear multiple times within a derivation hierarchy that form a diamond shape. This means that
 a member ambuigity could be caused. If a class Called A with a member called a is a base class for 
-B and C, and B and C are base class from which a class D is derived, D will contain two copies of
-the member a of class A. To avoid this problem class A must be declared __virtual__ for classes B 
-and C. A __virtual class__ must be initialized by its most derived class. In our example, the 
-constructor of D is responsible to invoke the constructors of classes A, B, and C.
+B and C, and B and C are base class from which a class D is derived, D will contain two instances 
+of class A. To avoid this problem class A must be declared __virtual__ for classes B and C. A 
+__virtual class__ must be initialized by its most derived class(Lowest inheriting class in the tree 
+of children). In our example, the constructor of D is responsible to invoke the constructors of 
+classes A, B, and C.
 ```
 class A { ... };
 class B : virtual public A { ... };

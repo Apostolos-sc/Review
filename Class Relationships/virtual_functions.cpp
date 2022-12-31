@@ -1,7 +1,8 @@
-//Author  : Professor Moshirpour
-//Project : Reviewing C++
-//File    : virtual_functions.cpp
-//Version : 0.1
+//Author   : Moshirpour M.
+//Comments : Scondrianis A.
+//Project  : Reviewing C++
+//File     : virtual_functions.cpp
+//Version  : 0.1
 #include <iostream>
 using namespace std;
 
@@ -22,6 +23,9 @@ class Parent {
         void someFunctionInParent() {
             cout << "Calling someFunctionInParent" << endl;
         }
+        void display() {
+            cout << "Display in Parent" << endl;
+        }
 };
 
 class Child: public Parent {
@@ -40,6 +44,12 @@ class Child: public Parent {
         }
         void someFunctionInChild() {
             cout << "Calling someFunctionInChild" << endl;
+        }
+        void display() {
+            //This is how you would call a function on the Parent class if your implementation depended on
+            //the implementation of the parent class.
+            Parent::display();
+            cout << "Display in Child" << endl;
         }
 };
 
